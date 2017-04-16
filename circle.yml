@@ -1,0 +1,23 @@
+machine:
+    environment:
+        IMPORT_PATH: "github.com/alecholmez"
+        REPO_NAME: "Image-Comp"
+        GODIST: "go1.8.1.linux-amd64.tar.gz"
+    post:
+        - mkdir -p download
+        - test -e download/$GODIST || curl -o download/$GODIST https://storage.googleapis.com/golang/$GODIST
+        - sudo rm -rf /usr/local/go
+        - sudo tar -C /usr/local -xzf download/$GODIST
+
+
+dependencies:
+    pre:
+        - go get -u github.com/kardianos/govendor
+    override:
+        - mkdir -p ~/.go_workspace/src/$IMPORT_PATH
+        - rm -rf ~/.go_workspace/src/$IMPORT_PATH
+        - cp -rf ~/$REPO_NAME ~/.go_workspace/src/$IMPORT_PATH
+
+test:
+    override:
+        - cd ~/.go_workspace/src/$IMPORT_PATH && GOPATH=~/.go_workspace go test ./...

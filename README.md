@@ -1,5 +1,5 @@
-# Image Analysis
-(Also known as Image-Comp)
+# Image Comp
+[![CircleCI](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop.svg?style=svg)](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop)
 
 __V 0.0.1__
 #### Current Image Formats Supported
@@ -8,7 +8,7 @@ __V 0.0.1__
 -   GIF
 
 ## Getting Started
-This program will compress a file with the specific amount of compression (Currently slow).
+This program will compress a file with the specified amount of compression.
 
 To run the program, follow these steps:
 ```bash

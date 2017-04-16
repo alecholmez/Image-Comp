@@ -1,5 +1,5 @@
 # Image Comp
-[![CircleCI](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop.svg?style=svg)](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop)
+[![CircleCI](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop.svg?style=shield)](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop)
 
 __V 0.0.1__
 #### Current Image Formats Supported
@@ -19,9 +19,9 @@ go build
 ```
 This will yield the following:
 ```bash
-Usage of ./image-analysis:
+Usage of ./Image-Comp:
   -imgPath string
-        Path to an image (default "./DarkBB8.png")
+        Path to a directory (default "./imgs")
 ```
 The program currently accepts one flag which is a path to the file to be compressed.
 

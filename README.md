@@ -2,6 +2,11 @@
 (Also known as Image-Comp)
 
 __V 0.0.1__
+#### Current Image Formats Supported
+-   JPEG
+-   PNG
+-   GIF
+
 ## Getting Started
 This program will compress a file with the specific amount of compression (Currently slow).
 
@@ -21,8 +26,9 @@ Usage of ./image-analysis:
 The program currently accepts one flag which is a path to the file to be compressed.
 
 ## Roadmap
--   [ ] Directory tree walking
--   [ ] Speed optimization
--   [ ] Async compression
+-   [X] Directory tree walking
+-   [X] Speed optimization
+-   [X] Async compression
 -   [ ] Tests
 -   [ ] Raw image handling
+-   [ ] Better memory management (Currently using high amounts of memory)

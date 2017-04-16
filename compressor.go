@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"image"
 	"image/png"
+	"log"
 	"os"
 )
 
+// Not sure what to do with this yet....
 type level int
 
 func (l level) toInt() int {
@@ -22,26 +24,40 @@ const (
 	High level = 10
 )
 
-func compress(origFile *os.File, newFile *os.File, compressionLevel level) error {
+func compress(origFile *os.File, compressionLevel level) error {
 	// Create encoder object with appropriate compression level
 	compressor := png.Encoder{
 		CompressionLevel: png.BestCompression,
 	}
 
 	img, format, err := image.Decode(origFile)
-	fmt.Printf("Format found: %s\n", format)
-	if err != nil {
+	fmt.Printf("\nFormat found: %s\n", format)
+	if err == image.ErrFormat {
+		log.Printf("\n%s file format not supported.\n\n", origFile.Name())
+		wg.Done()
+		return nil
+	} else if err != nil {
+		wg.Done()
 		return err
 	}
 	origFile.Close()
+
+	newFile, err := os.Create(origFile.Name() + "_compressed.png")
+	if err != nil {
+		wg.Done()
+		return err
+	}
 
 	// Compresses the image with "best compression" setting
 	fmt.Println("Encoding . . .")
 	err = compressor.Encode(newFile, img)
 	if err != nil {
-		return err
+		panic(err)
 	}
 	newFile.Close()
+
+	// Decrement the waitgroup counter
+	wg.Done()
 
 	return nil
 }

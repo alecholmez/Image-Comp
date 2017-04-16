@@ -1,6 +1,7 @@
 # Image Comp
 [![CircleCI](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop.svg?style=shield)](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop)
 [![Coverage Status](https://coveralls.io/repos/github/alecholmez/Image-Comp/badge.svg?branch=develop)](https://coveralls.io/github/alecholmez/Image-Comp?branch=develop)
+[![GitHub version](https://badge.fury.io/gh/alecholmez%2FImage-Comp.svg)](https://badge.fury.io/gh/alecholmez%2FImage-Comp)
 
 __V 0.0.1__
 #### Current Image Formats Supported

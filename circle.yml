@@ -19,5 +19,9 @@ dependencies:
         - cp -rf ~/$REPO_NAME ~/.go_workspace/src/$IMPORT_PATH
 
 test:
+    pre:
+        - go get github.com/mattn/goveralls
     override:
-        - cd ~/.go_workspace/src/$IMPORT_PATH && GOPATH=~/.go_workspace go test ./...
+        - cd ~/.go_workspace/src/$IMPORT_PATH && GOPATH=~/.go_workspace go test -v -cover -coverprofile=/home/ubuntu/coverage.out
+    post:
+        - /home/ubuntu/.go_workspace/bin/goveralls -coverprofile=/home/ubuntu/coverage.out -service=circle-ci -repotoken=$COVERALLS_TOKEN

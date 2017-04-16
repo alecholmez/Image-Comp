@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	imgPath = flag.String("imgPath", "./img.png", "Path to an image (must be PNG)")
+	imgPath = flag.String("imgPath", "./DarkBB8.png", "Path to an image")
 )
 
 type level int
@@ -39,6 +39,7 @@ func main() {
 		panic(err)
 	}
 
+	// Call the compress func (program wil hang)
 	compress(f, newF, high)
 
 	fmt.Println("Finished encoding image")

@@ -29,17 +29,19 @@ func main() {
 
 	// Open the img file for decoding
 	f, err := os.Open(*imgPath)
+	defer f.Close()
 	if err != nil {
 		panic(err)
 	}
 
 	// Create the file to be written
 	newF, err := os.Create("compressed.png")
+	defer newF.Close()
 	if err != nil {
 		panic(err)
 	}
 
-	// Call the compress func (program wil hang)
+	// Call the compress func (program will hang)
 	compress(f, newF, high)
 
 	fmt.Println("Finished encoding image")
@@ -56,17 +58,15 @@ func compress(origFile *os.File, newFile *os.File, compressionLevel level) error
 	if err != nil {
 		return err
 	}
+	origFile.Close()
 
 	// Compresses the image with "best compression" setting
 	fmt.Println("Encoding . . .")
-	fmt.Printf("Compression level: %d\n", compressionLevel.toInt())
-	for i := 0; i < compressionLevel.toInt(); i++ {
-		err = compressor.Encode(newFile, img)
-		if err != nil {
-			return err
-		}
-		fmt.Printf("Finished compression level: %d\n", i+1)
+	err = compressor.Encode(newFile, img)
+	if err != nil {
+		return err
 	}
+	newFile.Close()
 
 	return nil
 }

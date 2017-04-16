@@ -1,9 +1,14 @@
-# Image Analysis
-(Also known as Image-Comp)
+# Image Comp
+[![CircleCI](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop.svg?style=shield)](https://circleci.com/gh/alecholmez/Image-Comp/tree/develop)
+[![Coverage Status](https://coveralls.io/repos/github/alecholmez/Image-Comp/badge.svg?branch=develop)](https://coveralls.io/github/alecholmez/Image-Comp?branch=develop)
+[![GitHub version](https://badge.fury.io/gh/alecholmez%2FImage-Comp.svg)](https://badge.fury.io/gh/alecholmez%2FImage-Comp)
 
 __V 0.0.1__
+#### Current Image Formats Supported
+-   PNG
+
 ## Getting Started
-This program will compress a file with the specific amount of compression (Currently slow).
+This program will compress a file with the specified amount of compression.
 
 To run the program, follow these steps:
 ```bash
@@ -14,15 +19,15 @@ go build
 ```
 This will yield the following:
 ```bash
-Usage of ./image-analysis:
+Usage of ./Image-Comp:
   -imgPath string
-        Path to an image (default "./DarkBB8.png")
+        Path to a directory (default "./imgs")
 ```
 The program currently accepts one flag which is a path to the file to be compressed.
 
 ## Roadmap
--   [ ] Directory tree walking
--   [ ] Speed optimization
--   [ ] Async compression
--   [ ] Tests
--   [ ] Raw image handling
+-   [X] Directory tree walking
+-   [X] Speed optimization
+-   [X] Async compression
+-   [X] Tests
+-   [ ] Better memory management (Currently using high amounts of memory)

@@ -3,70 +3,46 @@ package main
 import (
 	"flag"
 	"fmt"
-	"image"
-	"image/png"
+	"log"
 	"os"
+	"path/filepath"
+	"sync"
 )
 
 var (
-	imgPath = flag.String("imgPath", "./DarkBB8.png", "Path to an image")
-)
-
-type level int
-
-func (l level) toInt() int {
-	return int(l)
-}
-
-const (
-	low    level = 1
-	medium level = 5
-	high   level = 10
+	imgPath = flag.String("imgPath", "./imgs", "Path to a folder")
+	wg      sync.WaitGroup
 )
 
 func main() {
 	flag.Parse()
 
-	// Open the img file for decoding
-	f, err := os.Open(*imgPath)
+	err := filepath.Walk(*imgPath, visit)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
-	// Create the file to be written
-	newF, err := os.Create("compressed.png")
-	if err != nil {
-		panic(err)
-	}
-
-	// Call the compress func (program wil hang)
-	compress(f, newF, high)
-
-	fmt.Println("Finished encoding image")
+	// Wait for all compression routines to finish before exiting
+	wg.Wait()
 }
 
-func compress(origFile *os.File, newFile *os.File, compressionLevel level) error {
-	// Create encoder object with appropriate compression level
-	compressor := png.Encoder{
-		CompressionLevel: png.BestCompression,
+// Each image that is "visited" will be encoded/compressed in an attempt to save storage
+func visit(path string, f os.FileInfo, err error) error {
+	if f.IsDir() {
+		// Exit the function if a directory is found
+		return nil
 	}
 
-	img, format, err := image.Decode(origFile)
-	fmt.Printf("Format found: %s\n", format)
+	fmt.Printf("\nVisited: %s\n", path)
+	file, err := os.Open(path)
 	if err != nil {
 		return err
 	}
 
-	// Compresses the image with "best compression" setting
-	fmt.Println("Encoding . . .")
-	fmt.Printf("Compression level: %d\n", compressionLevel.toInt())
-	for i := 0; i < compressionLevel.toInt(); i++ {
-		err = compressor.Encode(newFile, img)
-		if err != nil {
-			return err
-		}
-		fmt.Printf("Finished compression level: %d\n", i+1)
-	}
+	wg.Add(1)
+	go compress(file)
+
+	fmt.Printf("Finished encoding image: %s\n", f.Name())
 
 	return nil
 }

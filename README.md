@@ -27,5 +27,5 @@ The program currently accepts one flag which is a path to the file to be compres
 -   [X] Directory tree walking
 -   [X] Speed optimization
 -   [X] Async compression
--   [ ] Tests
+-   [X] Tests
 -   [ ] Better memory management (Currently using high amounts of memory)

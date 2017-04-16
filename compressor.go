@@ -8,23 +8,7 @@ import (
 	"os"
 )
 
-// Not sure what to do with this yet....
-type level int
-
-func (l level) toInt() int {
-	return int(l)
-}
-
-const (
-	// Low amount of compression
-	Low level = 1
-	// Medium amount of compression
-	Medium level = 5
-	// High amount of compression
-	High level = 10
-)
-
-func compress(origFile *os.File, compressionLevel level) error {
+func compress(origFile *os.File) error {
 	// Create encoder object with appropriate compression level
 	compressor := png.Encoder{
 		CompressionLevel: png.BestCompression,

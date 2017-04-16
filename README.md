@@ -3,9 +3,7 @@
 
 __V 0.0.1__
 #### Current Image Formats Supported
--   JPEG
 -   PNG
--   GIF
 
 ## Getting Started
 This program will compress a file with the specified amount of compression.
@@ -30,5 +28,4 @@ The program currently accepts one flag which is a path to the file to be compres
 -   [X] Speed optimization
 -   [X] Async compression
 -   [ ] Tests
--   [ ] Raw image handling
 -   [ ] Better memory management (Currently using high amounts of memory)

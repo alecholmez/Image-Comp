@@ -40,7 +40,7 @@ func visit(path string, f os.FileInfo, err error) error {
 	}
 
 	wg.Add(1)
-	go compress(file, High)
+	go compress(file)
 
 	fmt.Printf("Finished encoding image: %s\n", f.Name())
 
